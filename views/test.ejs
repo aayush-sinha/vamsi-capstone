@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+        <!--<link rel="stylesheet" href="css/icon-font.css">-->
+
+        <link rel="stylesheet" href="/css/main.css">
+        
+        
+        <title>Gurukul | Landing Page</title>
+    </head>
+
+    <body>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="/test/#scrolllogin" class="navigation__link">Login</a></li>
+                    <li class="navigation__item"><a href="/users/register" class="navigation__link">Register</a></li>
+                    </ul>
+            </nav>
+        </div>
+
+        <header class="header">
+            <div class="header__logo-box">
+                <img src="../img/logo-white.png" alt="Logo" class="header__logo">
+            </div>
+
+            <div class="header__text-box">
+                <h1 class="heading-primary">
+                    <span class="heading-primary--main">Gurukul</span>
+                    <span class="heading-primary--sub">Student's Best Friend</span>
+                </h1>
+
+                <a href="/test/#scrolllogin" class="btn btn--white btn--animated">Login/Register</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="section-about">
+                <div class="u-center-text u-margin-bottom-big">
+                    <h2 class="heading-secondary">
+                        Our Modules
+                    </h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="feature-box__icon icon-basic-world"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Marks Predictor</h3>
+                            <p class="feature-box__text">
+                                Predicts marks calculates waitage and helps you reach the goal.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="feature-box__icon icon-basic-compass"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Appointment</h3>
+                            <p class="feature-box__text">
+                                Simple and easy time management for students and teachers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="feature-box__icon icon-basic-map"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Question Bank</h3>
+                             <p class="feature-box__text">
+                                Get all the previous years question with answers sorted by subject.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-1-of-4">
+                        <div class="feature-box">
+                            <i class="feature-box__icon icon-basic-heart"></i>
+                            <h3 class="heading-tertiary u-margin-bottom-small">Chat App</h3>
+                            <p class="feature-box__text">
+                                Real time internal Chat app for students and teachers, Promote events etc.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section class="section-book" id="scrolllogin">
+                <div class="row">
+                    <div class="book">
+                        <div class="book__form">
+                            <form action="/users/login" method="POST" class="form">
+                                <div class="u-margin-bottom-medium">
+                                    <h2 class="heading-secondary">
+                                        Login
+                                    </h2>
+                                </div>
+                                <% include ./partials/messages %>
+                                <div class="form__group">
+                                    <input type="text" class="form__input" placeholder="Email" id="email" name="email" required>
+                                    <label for="name" class="form__label">Email</label>
+                                </div>
+
+                                <div class="form__group">
+                                    <input type="password" class="form__input" placeholder="Password" id="password" name="password" required>
+                                    <label for="email" class="form__label">Password</label>
+                                </div>
+
+                                
+
+                                <div class="form__group">
+                                    <button class="btn btn--green" type="submit">Login &rarr;</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            
+        </footer>
+
+       
+
+    </body>
+</html>

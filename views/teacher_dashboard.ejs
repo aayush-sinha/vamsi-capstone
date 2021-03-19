@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+        <!--<link rel="stylesheet" href="css/icon-font.css">-->
+
+        <link rel="stylesheet" href="/css/main.css">
+        
+        
+        <title>Welcome | Teacher Dashboard</title>
+    </head>
+
+    <body>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="#" class="navigation__link">Upload Questions</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link">Appointments</a></li>
+                    <li class="navigation__item"><a href="/users/logout" class="navigation__link">Logout</a></li>
+                    </ul>
+            </nav>
+        </div>
+
+        <header class="header">
+            <div class="header__logo-box">
+                <img src="../img/logo-white.png" alt="Logo" class="header__logo">
+            </div>
+
+            <div class="header__text-box">
+                <h1 class="heading-primary">
+                    <span class="heading-primary--main">Welcome</span>
+                    <span class="heading-primary--sub"><%= user.name %></span>
+                </h1>
+
+                <!-- <a href="/test/#scrolllogin" class="btn btn--white btn--animated">Login/Register</a> -->
+            </div>
+        </header>
+
+        <main>
+            
+
+            <section class="section-tours" id="section-tours">
+                
+
+                <div class="row">
+                    <div class="col-1-of-3">
+                       <div class="card">
+                           <div class="card__side card__side--front">
+                                <div class="card__picture card__picture--1">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--1">Upload Questions</span>
+                                </h4>
+                                <div class="card__cta">
+                                    <a href="#popup" class="btn btn--green">Select</a>
+                                </div>
+                           </div>
+                           
+                       </div>
+                    </div>
+
+
+                   
+
+
+                    <div class="col-1-of-3">
+                        <div class="card">
+                            <div class="card__side card__side--front">
+                                <div class="card__picture card__picture--3">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--3">Appointments</span>
+                                </h4>
+                                <div class="card__cta">
+                                    <a href="#popup" class="btn btn--green">Select</a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+            </section>
+            
+
+            
+        </main>
+
+        <footer class="footer">
+            
+        </footer>
+
+       
+
+    </body>
+</html>
