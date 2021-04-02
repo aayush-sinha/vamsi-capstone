@@ -1,0 +1,21 @@
+﻿MentorSlot,SlotDetails
+, ( Attendance is Compulsory )
+
+Timing,Mon,Tue,Wed,Thu,Fri,Sat,Sun
+09-10 AM,,,,,," Practical / G:2 C:CSE507 / R: 33-303 / S:KE192 : LPULive",
+10-11 AM," Lecture / G:All C:CSE504 / R: 33-502 / S:KE192 : LPULive",," Lecture / G:All C:CSE504 / R: 33-502 / S:KE192 : LPULive",,," Practical / G:2 C:CSE507 / R: 33-303 / S:KE192 : LPULive",
+11-12 AM,,,," Lecture / G:All C:CSE504 / R: 33-502 / S:KE192 : LPULive",,Project Work/ Other Weekly Activities. Check Schedule Below,
+01-02 PM," Lecture / G:All C:PSY803 / R: 33-310 / S:KOE80 : LPULive"," Lecture / G:All C:PSY803 / R: 33-310 / S:KOE80 : LPULive"," Lecture / G:All C:PSY803 / R: 33-310 / S:KOE80 : LPULive",,," Lecture / G:All C:INT402 / R: 34-107 / S:KE184 : LPULive",
+02-03 PM,,,,,," Lecture / G:All C:INT402 / R: 34-107 / S:KE184 : LPULive",
+03-04 PM,," Practical / G:0 C:INT402 / R: 34-107 / S:KE184 : LPULive",,,," Guidance/G:All C:CSE445/ R: LPU-Live / S:KC450 : LPULive",
+04-05 PM,," Practical / G:0 C:INT402 / R: 34-107 / S:KE184 : LPULive",,,,Project Work/ Other Weekly Activities. Check Schedule Below,
+
+AttendanceDate,ID08_09_AM,ID09_10_AM,ID10_11_AM,ID11_12_AM,ID12_01_PM,ID01_02_PM,ID02_03_PM,ID03_04_PM,ID04_05_PM,ID05_06_PM,ID06_07_PM,ID07_08_PM,ID08_09_PM
+
+CourseCode,Coursetype,CourseName,Lectures,Tutorial,Practical,Credits,Faculty___Block___RoomNo___Cabin_No___
+CSE445,CR,CAPSTONE PROJECT,0,0,20,10,Amandeep Kaur ( 57-207-CH7 )   Last Updated :: Feb  8 2020 10:00AM
+CSE504,DE,STORAGE TECHNOLOGY FOUNDATION,3,0,0,3,Ashu ( 34-204-CH16 )   Last Updated :: Feb  4 2020  1:19PM
+CSE507,DE,STORAGE TECHNOLOGY FOUNDATION LABORATORY,0,0,2,1,Ashu ( 34-204-CH16 )   Last Updated :: Feb  4 2020  1:19PM
+INT402,DE,MODERN WEB PROGRAMMING TOOLS AND TECHNIQUES,2,0,2,3,Upinder Kaur ( 33-203-CH17 )   Last Updated :: Sep  5 2019  2:15PM
+PSY803,OE,PSYCHOLOGY OF INTERPERSONAL RELATIONSHIPS,3,0,0,3,Dr. Zahoor Ahmad Lone ( 18-504-CH9 )   Last Updated :: Feb  8 2021  3:15PM
+

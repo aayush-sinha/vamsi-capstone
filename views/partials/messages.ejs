@@ -15,3 +15,15 @@
   <%= error %>
 </a>
 <% } %>
+<% if(teacherFree != ''){ %>
+  <div class="alert alert-success" role="alert">
+    <%= teacherFree %>
+  </div>
+  <% } %>
+  <% if(teacherNotFree != ''){ %>
+    <div class="alert alert-danger" role="alert">
+      <%= teacherNotFree %>
+    </div>
+    
+    
+    <% } %>
