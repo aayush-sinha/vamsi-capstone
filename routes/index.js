@@ -40,19 +40,20 @@ res.render('admin_dashboard', {
 router.get('/', (req, res) =>
 res.render('test')
 );
-
+//endpoint for student to download questions
 router.get("/ques_download", function (req, res) {
   Ques.find({}, function (err, ques) {
     if (err) {
       console.log(err);
     } else {
       console.log(ques)
-      //to show download page
+      //to show download page 
+      // .render will take two args 1st what page to render, 2nd what data is required to render that page
       res.render("ques_download", { ques: ques });
     }
   });
 });
-
+//this endpoint is to upload teachers csv file
 router.get('/uploadTimeTable', ensureAuthenticated, (req, res) =>{
   const id = req.user._id
   res.render("timetable")
@@ -101,13 +102,14 @@ router.post('/makeAppointment', (req, res) =>{
   slotString = "04:00 PM - 05-00 PM"
 
   console.log(slot)
+  //to get teachers csv file name from dataname
   Time.find({timeid: name}, function (err, tt) {
     if (err) {
       console.log(err);
     } 
     else {
       //console.log(tt);
-      let json = csvToJson.getJsonFromCsv("uploads/"+tt[0].file);
+      let json = csvToJson.getJsonFromCsv("uploads/"+tt[0].file);//to convert csv to json
       const key = JSON.stringify(json[slot])
       console.log(key)
       function locations(substring,string){
@@ -168,6 +170,7 @@ Appointment.find({tid: req.user._id, status: true}, function (err, x) {
     res.render("upcomingAppointment", {  appointments: x });
   }
 }))
+
 router.get('/teacherAppointmentAccept/:id', (req, res) =>
 Appointment.updateOne({ _id: req.params.id}, { status: true }, function (err, x) {
   if (err) {
@@ -177,6 +180,7 @@ Appointment.updateOne({ _id: req.params.id}, { status: true }, function (err, x)
     res.redirect("/teacherAppointment");
   }
 }))
+
 router.get('/teacherAppointmentReject/:id', (req, res) =>
 Appointment.deleteOne({_id: req.params.id}, function (err, x) {
   if (err) {
@@ -189,6 +193,7 @@ Appointment.deleteOne({_id: req.params.id}, function (err, x) {
 router.get('/addSubject', ensureAuthenticated, (req, res) =>{
   res.render("addSubject")
 })
+//this endpoint is to submit subject details by the admin
 router.post('/addSubject',(req, res) =>{
 
   Subject.create({
@@ -217,7 +222,7 @@ router.get('/marksPredict', (req, res) =>{
 })
 })
 router.post('/marksPredict', (req, res) =>{
-  let ep = req.body.ep
+  let ep = req.body.ep //expected %
   let ans = {}
   console.log(req.body.code)
   Subject.find({code: req.body.code},function (err, x) {
