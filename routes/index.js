@@ -3,8 +3,10 @@ const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const Ques = require('../models/ques');
 const Time = require('../models/time');
+const Subject = require('../models/subject');
 const multer = require('multer');
 const User = require('../models/User');
+const Appointment = require('../models/appointments');
 let csvToJson = require('convert-csv-to-json');
 // Welcome Page
 //router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
@@ -26,7 +28,11 @@ req.user.role == "s" ?
 res.render('student_dashboard', {
   user: req.user
 }):
+req.user.role == "t" ? 
 res.render('teacher_dashboard', {
+  user: req.user
+}):
+res.render('admin_dashboard', {
   user: req.user
 })
 );
@@ -41,6 +47,7 @@ router.get("/ques_download", function (req, res) {
       console.log(err);
     } else {
       console.log(ques)
+      //to show download page
       res.render("ques_download", { ques: ques });
     }
   });
@@ -70,10 +77,30 @@ router.get('/makeAppointment', (req, res) =>{
   });
 })
 router.post('/makeAppointment', (req, res) =>{
+  const student = req.user._id
+  const studentName = req.user.name
   const name = req.body.name
   const date = new Date(req.body.date)
+  const appdate = date.toString().substring(0,15)
+  console.log(appdate)
   const slot = req.body.slot
- 
+  let slotString
+  if (slot == 2)
+  slotString = "09:00 AM - 10-00 AM"
+  else if (slot == 3)
+  slotString = "10:00 AM - 11-00 AM"
+  else if (slot == 4)
+  slotString = "11:00 AM - 12-00 PM"
+  else if (slot == 5)
+  slotString = "01:00 PM - 02-00 PM"
+  else if (slot == 6)
+  slotString = "02:00 PM - 03-00 PM"
+  else if (slot == 7)
+  slotString = "03:00 PM - 04-00 PM"
+  else if (slot == 8)
+  slotString = "04:00 PM - 05-00 PM"
+
+  console.log(slot)
   Time.find({timeid: name}, function (err, tt) {
     if (err) {
       console.log(err);
@@ -96,6 +123,16 @@ router.post('/makeAppointment', (req, res) =>{
      }
      if (arr1[date.getDay()-1] == 1){
       console.log("Teacher Free")
+      Appointment.create({
+        sid: student,
+        tid: name,
+        Desc: req.body.desc,
+        sname: studentName,
+        appdate: appdate,
+        slot: slot,
+        slotString: slotString,
+        status: false
+      });
       req.flash(
         'teacherFree',
         'Appointment Request Sent.'
@@ -113,12 +150,107 @@ router.post('/makeAppointment', (req, res) =>{
     }
     
   });
-  
-
- 
-  
- 
-  
 })
+router.get('/teacherAppointment', (req, res) =>
+Appointment.find({tid: req.user._id, status: false}, function (err, x) {
+  if (err) {
+    console.log(err);
+  } else {
+    res.render("teacherAppointment", {  appointments: x });
+  }
+}))
 
+router.get('/upcomingAppointment', (req, res) =>
+Appointment.find({tid: req.user._id, status: true}, function (err, x) {
+  if (err) {
+    console.log(err);
+  } else {
+    res.render("upcomingAppointment", {  appointments: x });
+  }
+}))
+router.get('/teacherAppointmentAccept/:id', (req, res) =>
+Appointment.updateOne({ _id: req.params.id}, { status: true }, function (err, x) {
+  if (err) {
+    console.log(err);
+  } else {
+
+    res.redirect("/teacherAppointment");
+  }
+}))
+router.get('/teacherAppointmentReject/:id', (req, res) =>
+Appointment.deleteOne({_id: req.params.id}, function (err, x) {
+  if (err) {
+    console.log(err);
+  } else {
+    res.redirect("/teacherAppointment");
+  }
+}))
+
+router.get('/addSubject', ensureAuthenticated, (req, res) =>{
+  res.render("addSubject")
+})
+router.post('/addSubject',(req, res) =>{
+
+  Subject.create({
+    code: req.body.code,
+    sem: req.body.sem,
+    ccac: req.body.ccac,
+    nccac: req.body.nccac,
+    caw: req.body.caw,
+    mtec: req.body.mtec,
+    mtew: req.body.mtew,
+    pc: req.body.pc,
+    pw: req.body.pw,
+    etew: req.body.etew,
+    aw: req.body.aw,
+});
+ req.flash('teacherFree', 'Uploaded');
+ res.redirect('/addSubject');
+})
+router.get('/marksPredict', (req, res) =>{
+  Subject.find({},function (err, x) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("marksPredict", {  sub: x });
+    }
+})
+})
+router.post('/marksPredict', (req, res) =>{
+  let ep = req.body.ep
+  let ans = {}
+  console.log(req.body.code)
+  Subject.find({code: req.body.code},function (err, x) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(x)
+      if (x[0].ccac>0){
+        ans.ca = Math.ceil((60/100)*ep)
+        ans.caEach = Math.ceil(ans.ca/x[0].ccac)
+      }
+      if (x[0].mtew>0){
+        ans.mte = Math.ceil((40/100)*ep)
+      }
+      if (x[0].mtew==0){
+        ans.mte = 0
+      }
+      if (x[0].etew>0){
+        ans.ete = Math.ceil((70/100)*ep)
+      }
+      if (x[0].aw>0){
+        ans.a = Math.ceil((5/100)*ep)
+      }
+      if (x[0].pc==0){
+        ans.pc = 0
+      }
+      if (x[0].pc>0){
+        ans.pc = Math.ceil((40/100)*ep)
+      }
+      console.log(ans)
+      console.log(((25/60)*ans.ca)+((20/40)*ans.mte)+((50/70)*ans.ete)+ans.a)
+      res.render("marksPredictResult", {  ans: ans });
+    }
+})
+})
 module.exports = router;
