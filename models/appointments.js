@@ -15,7 +15,7 @@ var appointmentSchema = new mongoose.Schema({
     appdate: String,
     slot: String,
     slotString: String,
-    status: Boolean,
+    status: String,
     Date: { type: Date, default: Date.now }
 });
 

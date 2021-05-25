@@ -67,7 +67,29 @@ router.post('/uploadTimeTable', upload.array('timeTable'), (req, res) =>{
   
 return res.json({ status: 'OK', uploaded: req.files.length });
 })
+function getTeacherName(id){
+  console.log(id)
+  User.find({_id: id}, function (err, t) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(t[0].name)
+      return(t[0].name)
+    }
+  });
+}
+router.get('/appointmentStatus', (req, res) =>{
+ 
 
+  Appointment.find({sid: req.user._id}, function (err, x) {
+    if (err) {
+      console.log(err);
+    } else {
+     
+      res.render("appointmentStatus", {  appointments: x });
+    }
+  });
+})
 router.get('/makeAppointment', (req, res) =>{
   User.find({role: 't'}, function (err, user) {
     if (err) {
@@ -133,7 +155,7 @@ router.post('/makeAppointment', (req, res) =>{
         appdate: appdate,
         slot: slot,
         slotString: slotString,
-        status: false
+        status: "Pending"
       });
       req.flash(
         'teacherFree',
@@ -154,7 +176,7 @@ router.post('/makeAppointment', (req, res) =>{
   });
 })
 router.get('/teacherAppointment', (req, res) =>
-Appointment.find({tid: req.user._id, status: false}, function (err, x) {
+Appointment.find({tid: req.user._id, status: "Pending"}, function (err, x) {
   if (err) {
     console.log(err);
   } else {
@@ -163,7 +185,7 @@ Appointment.find({tid: req.user._id, status: false}, function (err, x) {
 }))
 
 router.get('/upcomingAppointment', (req, res) =>
-Appointment.find({tid: req.user._id, status: true}, function (err, x) {
+Appointment.find({tid: req.user._id, status: "Accepted"}, function (err, x) {
   if (err) {
     console.log(err);
   } else {
@@ -172,7 +194,7 @@ Appointment.find({tid: req.user._id, status: true}, function (err, x) {
 }))
 
 router.get('/teacherAppointmentAccept/:id', (req, res) =>
-Appointment.updateOne({ _id: req.params.id}, { status: true }, function (err, x) {
+Appointment.updateOne({ _id: req.params.id}, { status: "Accepted" }, function (err, x) {
   if (err) {
     console.log(err);
   } else {
@@ -182,10 +204,11 @@ Appointment.updateOne({ _id: req.params.id}, { status: true }, function (err, x)
 }))
 
 router.get('/teacherAppointmentReject/:id', (req, res) =>
-Appointment.deleteOne({_id: req.params.id}, function (err, x) {
+Appointment.updateOne({ _id: req.params.id}, { status: "Rejected" }, function (err, x) {
   if (err) {
     console.log(err);
   } else {
+
     res.redirect("/teacherAppointment");
   }
 }))
